@@ -3,6 +3,7 @@
 //import atm.js file to index.js file
 
 const accountBalance = require("./account.js");
+const userWalletBalance = require('./wallet.js');
 const prompt = require('prompt-sync')({sigint: true});
 
 //getBalance function
@@ -11,13 +12,19 @@ function getBalance(){
     return accountBalance.currentBalance;
 }
 
+/* function getWalletAmount(){
+    console.log(userWalletBalance.walletBalance);
+    return userWalletBalance.walletBalance;
+} */
+
 //withdraw function
 function withdraw( withdrawAmount, validInput){
     if (validInput == true){
         if (accountBalance.currentBalance > withdrawAmount){
             accountBalance.currentBalance -= withdrawAmount;
             console.log('Your current balance after the withdraw is: $' + accountBalance.currentBalance);
-            console.log(accountBalance.currentBalance);
+            userWalletBalance.walletBalance += withdrawAmount;
+            console.log('The amount you now have in your wallet is: $' + userWalletBalance.walletBalance);
             return accountBalance.currentBalance;
         }else {
             console.log('Insufficient funds in your account.');
@@ -29,11 +36,17 @@ function withdraw( withdrawAmount, validInput){
 //deposit function
 function deposit( depositAmount, validInput){
     if (validInput == true){
-        accountBalance.currentBalance += depositAmount;
-        console.log('The amount you want to deposit is: $' + accountBalance.currentBalance);
-        return accountBalance.currentBalance;
-    }else {
-        return accountBalance.currentBalance;
+        if (userWalletBalance.walletBalance > depositAmount){
+            accountBalance.currentBalance += depositAmount;
+            console.log('The amount you want to deposit is: $' + accountBalance.currentBalance);
+            userWalletBalance.walletBalance -= depositAmount;
+            console.log('The amount you have left in your wallet is: $' + userWalletBalance.walletBalance);
+            return accountBalance.currentBalance;
+        }
+        else{
+            console.log("You don't have enough cash to deposit");
+            return accountBalance.currentBalance;
+        }
     }
 }
 
@@ -111,3 +124,4 @@ module.exports.startDeposit = deposit;
 module.exports.pin = validatePin;
 module.exports.validateInput = validatePinInput;
 module.exports.checkUserNumInput = validInputNumber;
+/* module.exports.walletBalance = getWalletAmount; */

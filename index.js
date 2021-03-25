@@ -1,7 +1,8 @@
 "use strict"
 //import atm.js file into index.js file
 
-const {balance, startWithdraw, startDeposit, pin, validateInput, checkUserNumInput} = require('./atm.js')
+const {balance, startWithdraw, startDeposit, pin, validateInput, checkUserNumInput} = require('./atm.js');
+//const {walletBalance } = require('./atm.js');
 const prompt = require('prompt-sync')({sigint: true});
 
 
@@ -9,15 +10,17 @@ mainMenu();
 function mainMenu(){
     const userInputPin = prompt('What is your 4 digit pin? ');
     let intValid = validateInput(userInputPin);
-    let trialInputs = pin(userInputPin, intValid);
+    pin(userInputPin, intValid);
     console.log('Correct Pin');
-    console.log('You entered ' + trialInputs);
     let mainLoop = true;
     while (mainLoop === true){
     console.log('What would you like to do?' + '\n' + 'Balance' + '\n' + 'Withdraw' + '\n' + 'Deposit' + '\n' + 'Exit');
     let userButton = prompt().toLowerCase();
 
         switch(userButton){
+/*             case 'wallet':
+                walletBalance();
+                break; */
             case 'balance':
                 balance();
                 break;
