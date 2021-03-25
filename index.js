@@ -29,8 +29,12 @@ function mainMenu(){
                 console.log(currentBalance);
                 break;
             case 'withdraw':
+                let withdrawAmount = 50;
+                currentBalance = startWithdraw(currentBalance, withdrawAmount);
                 break;
             case 'deposit':
+                let depositAmount = 100;
+                currentBalance = startDeposit(currentBalance, depositAmount);
                 break;
             case 'exit':
                 mainLoop = false;

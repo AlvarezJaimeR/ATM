@@ -13,13 +13,17 @@ function getBalance(){
 }
 
 //withdraw function
-function withdraw(){
-
+function withdraw(currentBalance, withdrawAmount){
+    let userWithdraw = currentBalance - withdrawAmount;
+    console.log(userWithdraw);
+    return userWithdraw;
 }
 
 //deposit function
-function deposit(){
-
+function deposit(currentBalance, depositAmount){
+    let userDeposit = currentBalance + depositAmount;
+    console.log(userDeposit);
+    return userDeposit;
 }
 
 //validatePin function
