@@ -9,5 +9,7 @@ let currentBalance = 1000;
 let pin = 4324;
 
 //export functions or values
-module.exports.accountBalance = currentBalance;
-module.exports.userPin = pin;
+module.exports = {
+    currentBalance,
+    pin
+};

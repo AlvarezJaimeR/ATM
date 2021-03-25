@@ -2,41 +2,38 @@
 //import account.js file into atm.js file
 //import atm.js file to index.js file
 
-const{accountBalance, userPin} = require("./account.js");
+const accountBalance = require("./account.js");
 const prompt = require('prompt-sync')({sigint: true});
-
-let totalBalance = accountBalance;
 
 //getBalance function
 function getBalance(){
-
+    console.log(accountBalance.currentBalance);
+    return accountBalance.currentBalance;
 }
 
 //withdraw function
-function withdraw(currentBalance, withdrawAmount, validInput){
+function withdraw( withdrawAmount, validInput){
     if (validInput == true){
-        if (currentBalance > withdrawAmount){
-            let userWithdraw = currentBalance - withdrawAmount;
-            console.log('Your current balance after the withdraw is: $' + userWithdraw);
-            return userWithdraw;
+        if (accountBalance.currentBalance > withdrawAmount){
+            accountBalance.currentBalance -= withdrawAmount;
+            console.log('Your current balance after the withdraw is: $' + accountBalance.currentBalance);
+            console.log(accountBalance.currentBalance);
+            return accountBalance.currentBalance;
         }else {
             console.log('Insufficient funds in your account.');
-            return currentBalance;
+            return accountBalance.currentBalance;
         }
-    }else {
-        return currentBalance;
     }
 }
 
 //deposit function
-function deposit(currentBalance, depositAmount, validInput){
+function deposit( depositAmount, validInput){
     if (validInput == true){
-        let userDeposit = currentBalance + depositAmount;
-        console.log('The amount you want to deposit is: $' + depositAmount);
-        console.log(userDeposit);
-        return userDeposit;
+        accountBalance.currentBalance += depositAmount;
+        console.log('The amount you want to deposit is: $' + accountBalance.currentBalance);
+        return accountBalance.currentBalance;
     }else {
-        return currentBalance;
+        return accountBalance.currentBalance;
     }
 }
 
@@ -64,7 +61,7 @@ function validInputNumber(movingAmount, userButton){
 
 //validatePin function
 function validatePin(userInput, trueOrFalse){
-    if (userInput == userPin){
+    if (userInput == accountBalance.pin){
         return userInput;
     }
     else{
@@ -112,6 +109,5 @@ module.exports.balance = getBalance;
 module.exports.startWithdraw = withdraw;
 module.exports.startDeposit = deposit;
 module.exports.pin = validatePin;
-module.exports.valueBalance = totalBalance;
 module.exports.validateInput = validatePinInput;
 module.exports.checkUserNumInput = validInputNumber;
