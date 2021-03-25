@@ -1,5 +1,5 @@
 {
-  "name": "Day11",
+  "name": "Day11_ATM",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,5 +9,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "prompt": "^1.1.0",
+    "prompt-sync": "^4.2.0"
+  }
 }
