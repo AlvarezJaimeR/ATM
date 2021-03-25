@@ -13,17 +13,53 @@ function getBalance(){
 }
 
 //withdraw function
-function withdraw(currentBalance, withdrawAmount){
-    let userWithdraw = currentBalance - withdrawAmount;
-    console.log(userWithdraw);
-    return userWithdraw;
+function withdraw(currentBalance, withdrawAmount, validInput){
+    if (validInput == true){
+        if (currentBalance > withdrawAmount){
+            let userWithdraw = currentBalance - withdrawAmount;
+            console.log('Your current balance after the withdraw is: $' + userWithdraw);
+            return userWithdraw;
+        }else {
+            console.log('Insufficient funds in your account.');
+            return currentBalance;
+        }
+    }else {
+        return currentBalance;
+    }
 }
 
 //deposit function
-function deposit(currentBalance, depositAmount){
-    let userDeposit = currentBalance + depositAmount;
-    console.log(userDeposit);
-    return userDeposit;
+function deposit(currentBalance, depositAmount, validInput){
+    if (validInput == true){
+        let userDeposit = currentBalance + depositAmount;
+        console.log('The amount you want to deposit is: $' + depositAmount);
+        console.log(userDeposit);
+        return userDeposit;
+    }else {
+        return currentBalance;
+    }
+}
+
+//validate the withdraw amount to be a number
+function validInputNumber(movingAmount, userButton){
+    switch (userButton){
+        case 'withdraw':
+            let withdrawValid = validateIntegers(movingAmount);
+            if (withdrawValid == true){
+                return true;
+            }else{
+                console.log('Need to input only numbers.');
+                return false;
+            }
+        case 'deposit':
+            let depositValid = validateIntegers(movingAmount);
+            if (depositValid == true){
+                return true;
+            }else{
+                console.log('Need to input only numbers.');
+                return false;
+            }
+    }
 }
 
 //validatePin function
@@ -78,3 +114,4 @@ module.exports.startDeposit = deposit;
 module.exports.pin = validatePin;
 module.exports.valueBalance = totalBalance;
 module.exports.validateInput = validatePinInput;
+module.exports.checkUserNumInput = validInputNumber;
