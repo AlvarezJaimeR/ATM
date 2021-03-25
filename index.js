@@ -31,14 +31,16 @@ function mainMenu(){
             case 'withdraw':
                 console.log('How much would you like to withdraw?: ');
                 let withdrawAmount = prompt();
-                let validInputW = checkUserNumInput(withdrawAmount, userButton);
-                currentBalance = startWithdraw(currentBalance, withdrawAmount, validInputW);
+                let withdrawAmountInt = parseInt(withdrawAmount)
+                let validInputW = checkUserNumInput(withdrawAmountInt, userButton);
+                currentBalance = startWithdraw(currentBalance, withdrawAmountInt, validInputW);
                 break;
             case 'deposit':
                 console.log('How much would you like to deposit?: ');
                 let depositAmount = prompt();
-                let validInputD = checkUserNumInput(depositAmount, userButton);
-                currentBalance = startDeposit(currentBalance, depositAmount, validInputD);
+                let depositAmountInt = parseInt(depositAmount);
+                let validInputD = checkUserNumInput(depositAmountInt, userButton);
+                currentBalance = startDeposit(currentBalance, depositAmountInt, validInputD);
                 break;
             case 'exit':
                 mainLoop = false;
